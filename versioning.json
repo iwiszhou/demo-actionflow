@@ -1,5 +1,5 @@
 {
-    "version": "2.0.39",
+    "version": "2.0.40",
     "dev": {
         "name": "Billie DEV",
         "scheme": "wb-billie-dev",
@@ -17,11 +17,11 @@
         "scheme": "wb-billie-uat",
         "ios": {
             "identifier": "com.wonderbricks.billie-mobile",
-            "buildNumber": 105
+            "buildNumber": 106
         },
         "android": {
             "identifier": "com.wonderbricks.billie_mobile_uat",
-            "versionCode": 137
+            "versionCode": 138
         }
     },
     "poc": {

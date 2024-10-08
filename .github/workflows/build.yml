@@ -10,52 +10,17 @@ jobs:
       - name: 🏗 Setup repo
         uses: actions/checkout@v3
 
-      - name: Debug Git Setup and Verify Commits
+      - name: Check if the version in app.json has changed
+        id: check_version
         run: |
-          git fetch --all
-          git log --oneline -n 5  # Show last 5 commits for context
-
-      - name: Get the number of commits
-        run: |
-          COMMIT_COUNT=$(git rev-list --count HEAD)
-          echo "COMMIT_COUNT=$COMMIT_COUNT"
-          echo "COMMIT_COUNT=$COMMIT_COUNT" >> $GITHUB_ENV
-
-          # Exit early if we can't determine the commit count
-          if [ -z "$COMMIT_COUNT" ]; then
-            echo "Unable to determine commit count."
-            exit 1
-          fi
-
-      - name: Check if app.json has been changed
-        run: |
-          # Load the COMMIT_COUNT from the environment
-          source $GITHUB_ENV
-
-          # Check if there's more than one commit
-          if [ "$COMMIT_COUNT" -gt 1 ]; then
-            # Check if the app.json file was changed in the last commit
-            if git diff HEAD^ HEAD --name-only | grep -q 'app.json'; then
-              echo "app.json file has been changed"
-              
-              # Check if the version field has been modified in the app.json
-              if git diff HEAD^ HEAD -- app.json | grep -q '"version"'; then
-                echo "The version field in app.json has been modified."
-                VERSION_CHANGED=true
-              else
-                echo "The version field in app.json has NOT been modified."
-                VERSION_CHANGED=false
-              fi
-            else
-              echo "app.json file has NOT been changed."
-              VERSION_CHANGED=false
-            fi
+          # Check if the app.json file was changed in the push
+          if git diff HEAD^ HEAD -- app.json | grep '"version"'; then
+            echo "The version field in app.json has been modified."
+            VERSION_CHANGED=true
           else
-            echo "There is only one commit, cannot compare with previous commit."
+            echo "app.json file has NOT been changed."
             VERSION_CHANGED=false
           fi
-
-          # Set the VERSION_CHANGED variable in the GitHub environment
           echo "VERSION_CHANGED=$VERSION_CHANGED" >> $GITHUB_ENV
 
       - name: Act based on version change
