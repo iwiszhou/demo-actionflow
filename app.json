@@ -3,7 +3,7 @@
         "name": "Billie UAT",
         "scheme": "wb-billie-uat",
         "slug": "wb-billie11",
-        "version": "2.0.40",
+        "version": "2.0.41",
         "orientation": "portrait",
         "icon": "./assets/images/billie_icon.png",
         "userInterfaceStyle": "automatic",
@@ -16,7 +16,7 @@
             "**/*"
         ],
         "ios": {
-            "buildNumber": "106",
+            "buildNumber": "107",
             "requireFullScreen": true,
             "supportsTablet": false,
             "splash": {
@@ -40,7 +40,7 @@
             "bundleIdentifier": "com.wonderbricks.billie-mobile"
         },
         "android": {
-            "versionCode": 138,
+            "versionCode": 139,
             "googleServicesFile": "./google-services.json",
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
