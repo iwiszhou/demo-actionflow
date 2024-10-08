@@ -1,0 +1,19 @@
+{
+  "name": "gitflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "script:versioning": "node prebuilt-script/versioning.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iwiszhou/demo-actionflow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iwiszhou/demo-actionflow/issues"
+  },
+  "homepage": "https://github.com/iwiszhou/demo-actionflow#readme"
+}
