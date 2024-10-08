@@ -10,8 +10,28 @@ jobs:
       - name: 🏗 Setup repo
         uses: actions/checkout@v3
 
+      - name: Debug Git Setup and Verify Commits
+        run: |
+          git fetch --all
+          git log --oneline -n 5  # Show last 5 commits for context
+
+      - name: Get the number of commits
+        run: |
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+          echo "COMMIT_COUNT=$COMMIT_COUNT"
+          echo "COMMIT_COUNT=$COMMIT_COUNT" >> $GITHUB_ENV
+
+          # Exit early if we can't determine the commit count
+          if [ -z "$COMMIT_COUNT" ]; then
+            echo "Unable to determine commit count."
+            exit 1
+          fi
+
       - name: Check if app.json has been changed
         run: |
+          # Load the COMMIT_COUNT from the environment
+          source $GITHUB_ENV
+
           # Check if there's more than one commit
           if [ "$COMMIT_COUNT" -gt 1 ]; then
             # Check if the app.json file was changed in the last commit
