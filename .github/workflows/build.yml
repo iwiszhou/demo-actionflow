@@ -9,24 +9,33 @@ jobs:
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v3
-      - name: Check if the version in app.json has changed
-        id: check_version
+
+      - name: Check if app.json has been changed
         run: |
-          # Check if the app.json file was changed in the push
-          if git diff HEAD^ HEAD --name-only | grep -q 'app.json'; then
-            echo "app.json file has been changed"
-            # Check if the version field has been modified in the app.json
-            if git diff HEAD^ HEAD -- app.json | grep -q '"version"'; then
-              echo "The version field in app.json has been modified."
-              VERSION_CHANGED=true
+          # Check if there's more than one commit
+          if [ "$COMMIT_COUNT" -gt 1 ]; then
+            # Check if the app.json file was changed in the last commit
+            if git diff HEAD^ HEAD --name-only | grep -q 'app.json'; then
+              echo "app.json file has been changed"
+              
+              # Check if the version field has been modified in the app.json
+              if git diff HEAD^ HEAD -- app.json | grep -q '"version"'; then
+                echo "The version field in app.json has been modified."
+                VERSION_CHANGED=true
+              else
+                echo "The version field in app.json has NOT been modified."
+                VERSION_CHANGED=false
+              fi
             else
-              echo "The version field in app.json has NOT been modified."
+              echo "app.json file has NOT been changed."
               VERSION_CHANGED=false
             fi
           else
-            echo "app.json file has NOT been changed."
+            echo "There is only one commit, cannot compare with previous commit."
             VERSION_CHANGED=false
           fi
+
+          # Set the VERSION_CHANGED variable in the GitHub environment
           echo "VERSION_CHANGED=$VERSION_CHANGED" >> $GITHUB_ENV
 
       - name: Act based on version change
