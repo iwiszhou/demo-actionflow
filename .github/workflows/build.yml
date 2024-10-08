@@ -46,6 +46,8 @@ jobs:
           if [ "$VERSION_CHANGED" != "true" ]; then
             echo "app.json version doesn't change, trigger the Expo Update"
             yarn update:uat
+          else
+            echo "skip Expo Update"
           fi
 
       - name: 🚀 Expo build
@@ -55,4 +57,6 @@ jobs:
           if [ "$VERSION_CHANGED" = "true" ]; then
             echo "app.json version number bump up, trigger the Expo Build"
             yarn build:uat
+          else
+            echo "skip Expo Build"
           fi
