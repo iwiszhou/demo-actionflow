@@ -7,7 +7,9 @@
     "script:versioning": "node prebuilt-script/versioning.js",
     "update-android-version": "yarn script:versioning --platform=android --env=uat",
     "update-ios-version": "yarn script:versioning --platform=ios --env=uat",
-    "update-version": "yarn update-android-version && yarn update-ios-version"
+    "update-version": "yarn update-android-version && yarn update-ios-version",
+    "update:uat": "echo 'update only'",
+    "build:uat": "echo 'build only'"
   },
   "repository": {
     "type": "git",
