@@ -3,7 +3,7 @@
         "name": "Billie UAT",
         "scheme": "wb-billie-uat",
         "slug": "wb-billie",
-        "version": "2.0.35",
+        "version": "2.0.36",
         "orientation": "portrait",
         "icon": "./assets/images/billie_icon.png",
         "userInterfaceStyle": "automatic",
@@ -12,9 +12,11 @@
             "resizeMode": "contain",
             "backgroundColor": "#FFFFFF"
         },
-        "assetBundlePatterns": ["**/*"],
+        "assetBundlePatterns": [
+            "**/*"
+        ],
         "ios": {
-            "buildNumber": "101",
+            "buildNumber": "102",
             "requireFullScreen": true,
             "supportsTablet": false,
             "splash": {
@@ -27,13 +29,18 @@
             },
             "infoPlist": {
                 "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone.",
-                "UIBackgroundModes": ["fetch", "processing"],
-                "BGTaskSchedulerPermittedIdentifiers": ["com.transistorsoft.fetch"]
+                "UIBackgroundModes": [
+                    "fetch",
+                    "processing"
+                ],
+                "BGTaskSchedulerPermittedIdentifiers": [
+                    "com.transistorsoft.fetch"
+                ]
             },
             "bundleIdentifier": "com.wonderbricks.billie-mobile"
         },
         "android": {
-            "versionCode": 133,
+            "versionCode": 134,
             "googleServicesFile": "./google-services.json",
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
