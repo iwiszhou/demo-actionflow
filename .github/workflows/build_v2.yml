@@ -1,4 +1,5 @@
-name: DEV Deployment
+name: DEV or UAT Deployment
+
 on:
   workflow_dispatch:
     inputs:
@@ -11,30 +12,31 @@ on:
           - build
 
 jobs:
-  update:
+  deploy:
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/uat' # Run only on dev or uat branches
     runs-on: ubuntu-latest
+
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v4
         with:
-          ref: dev
           fetch-depth: 0 # Fetch all history to ensure we can reference HEAD^
 
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: Check selected optinon
-        run: echo ${{github.event.inputs.eastype}}
+      - name: Check selected option
+        run: echo "Selected option: ${{ github.event.inputs.eastype }}"
 
       - name: 🚀 Expo Build
-        if: ${{github.event.inputs.eastype}} === 'build'
+        if: github.event.inputs.eastype == 'build'
         run: |
-          # Fetch all branches and history
-          pwd
           yarn update-version-trigger-build:uat
-          git add app.json && git add versioning.json && git add .env-cmdrc && git commit -m "update version number in app.json" && git push
+          git add app.json versioning.json .env-cmdrc
+          git commit -m "update version number in app.json"
+          git push
           yarn build:uat
 
-      - name: 🚀 Expo update
-        if: ${{github.event.inputs.eastype}} === 'update'
+      - name: 🚀 Expo Update
+        if: github.event.inputs.eastype == 'update'
         run: yarn update:uat
