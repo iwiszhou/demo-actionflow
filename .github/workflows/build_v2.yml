@@ -27,15 +27,12 @@ jobs:
         run: echo ${{github.event.inputs.eastype}}
 
       - name: 🚀 Expo Build
-        if: ${{github.event.inputs.eastype}} === 'build'
+        if: ${{github.event.inputs.eastype}} == 'build'
         run: |
           # Fetch all branches and history
-          pwd
-          ls -al
-          yarn update-version-trigger-build:uat
-          git add app.json && git add versioning.json && git add .env-cmdrc && git commit -m "update version number in app.json" && git push
-          yarn build:uat
+          yarn update-version-trigger-build:uat && git add app.json && git add versioning.json && git add .env-cmdrc && git commit -m "update version number in app.json" && git push && yarn build:uat
+          
 
       - name: 🚀 Expo update
-        if: ${{github.event.inputs.eastype}} === 'update'
+        if: ${{github.event.inputs.eastype}} == 'update'
         run: yarn update:uat
