@@ -12,8 +12,7 @@ on:
           - build
 
 jobs:
-  deploy:
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/uat' # Run only on dev or uat branches
+  update:
     runs-on: ubuntu-latest
 
     steps:
