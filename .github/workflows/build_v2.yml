@@ -14,6 +14,15 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0 # Fetch all history to ensure we can reference HEAD^
+
+      - name: 📦 Install dependencies
+        run: yarn install
+
       - name: Check selected optinon
         run: echo ${{github.event.inputs.eastype}}
 
