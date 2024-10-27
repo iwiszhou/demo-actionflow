@@ -32,22 +32,14 @@ jobs:
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
-          
-      - name: Authenticate with PAT
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: git remote set-url origin https://x-access-token:${{secrets.PAT_TOKEN}}@github.com/iwiszhou/demo-actionflow.git
-
 
       - name: 🚀 Expo Build
         if: ${{ github.event.inputs.eastype == 'build' }}
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           yarn update-version-trigger-build:uat
           git add app.json versioning.json .env-cmdrc
           git commit -m "update version number in app.json"
-          git push https://x-access-token:${PAT_TOKEN}@github.com/iwiszhou/demo-actionflow.git dev
+          git push
           yarn build:uat
 
       - name: 🚀 Expo Update
