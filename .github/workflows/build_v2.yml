@@ -26,7 +26,12 @@ jobs:
 
 
       - name: 🚀 Debug Input Value
-        run: echo 'Input value:' ${{ github.event.inputs.eastype}}
+        run: echo 'Eas Selected Value:' ${{ github.event.inputs.eastype}}
+
+      - name: Set up Git user
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
 
       - name: 🚀 Expo Build
         if: ${{ github.event.inputs.eastype == 'build' }}
