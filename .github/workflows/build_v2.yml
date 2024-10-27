@@ -1,0 +1,30 @@
+name: DEV Deployment
+on:
+  workflow_dispatch:
+    inputs:
+      eastype:
+        type: choice
+        description: Choose eas update or build
+        required: true
+        options:
+          - update
+          - build
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check selected optinon
+        run: echo ${{github.event.inputs.eastype}}
+
+      - name: 🚀 Expo Build
+        if: ${{github.event.inputs.eastype}} === 'build'
+        run: |
+          # Fetch all branches and history
+          yarn update-version-trigger-build:uat
+          git add app.json && git add versioning.json && git add .env-cmdrc && git commit -m "update version number in app.json" && git push
+          yarn build:uat
+
+      - name: 🚀 Expo update
+        if: ${{github.event.inputs.eastype}} === 'update'
+        run: yarn update:uat

@@ -1,0 +1,62 @@
+on:
+  push:
+    branches:
+      - uat
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all history to ensure we can reference HEAD^
+
+      - name: 📦 Install dependencies
+        run: yarn install
+
+      - name: Check for app.json changes
+        run: |
+          # Fetch all branches and history
+          git fetch --all
+
+          # Check if app.json has been changed in the last commit
+          if git diff HEAD^ HEAD --name-only | grep 'app.json'; then
+            echo "app.json file has been changed."
+
+            # Check if the version field has been modified in app.json
+            if git diff HEAD^ HEAD -- app.json | grep '"version"'; then
+              echo "The version field in app.json has been modified."
+              VERSION_CHANGED=true
+            else
+              echo "The version field in app.json has NOT been modified."x``
+              VERSION_CHANGED=false
+            fi
+          else
+            echo "app.json file has NOT been changed."
+            VERSION_CHANGED=false
+          fi
+
+          # Set the VERSION_CHANGED variable in the GitHub environment for later use
+          echo "VERSION_CHANGED=$VERSION_CHANGED" >> $GITHUB_ENV
+
+      - name: 🚀 Expo update
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: |
+          if [ "$VERSION_CHANGED" != "true" ]; then
+            echo "app.json version doesn't change, trigger the Expo Update"
+            yarn update:uat
+          else
+            echo "skip Expo Update"
+          fi
+
+      - name: 🚀 Expo build
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: |
+          if [ "$VERSION_CHANGED" = "true" ]; then
+            echo "app.json version number bump up, trigger the Expo Build"
+            yarn build:uat
+          else
+            echo "skip Expo Build"
+          fi

@@ -1,0 +1,148 @@
+{
+    "expo": {
+        "name": "Billie UAT",
+        "scheme": "wb-billie-uat",
+        "slug": "wb-billie11",
+        "version": "2.0.42",
+        "orientation": "portrait",
+        "icon": "./assets/images/billie_icon.png",
+        "userInterfaceStyle": "automatic",
+        "splash": {
+            "image": "./assets/images/biillie-splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#FFFFFF"
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "buildNumber": "108",
+            "requireFullScreen": true,
+            "supportsTablet": false,
+            "splash": {
+                "image": "./assets/images/biillie-splash.png",
+                "resizeMode": "contain",
+                "backgroundColor": "#FFFFFF"
+            },
+            "config": {
+                "usesNonExemptEncryption": false
+            },
+            "infoPlist": {
+                "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone.",
+                "UIBackgroundModes": [
+                    "fetch",
+                    "processing"
+                ],
+                "BGTaskSchedulerPermittedIdentifiers": [
+                    "com.transistorsoft.fetch"
+                ]
+            },
+            "bundleIdentifier": "com.wonderbricks.billie-mobile"
+        },
+        "android": {
+            "versionCode": 140,
+            "googleServicesFile": "./google-services.json",
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "permissions": [
+                "android.permission.RECORD_AUDIO",
+                "android.permission.MODIFY_AUDIO_SETTINGS",
+                "android.permission.CAMERA"
+            ],
+            "package": "com.wonderbricks.billie_mobile_uat",
+            "enableHermes": true
+        },
+        "web": {
+            "bundler": "metro",
+            "output": "static",
+            "favicon": "./assets/images/favicon.png"
+        },
+        "plugins": [
+            "expo-router",
+            "./plugins/addGoogleQuickSearchBox",
+            [
+                "@sentry/react-native/expo",
+                {
+                    "organization": "wonderbricks",
+                    "project": "billie",
+                    "url": "https://sentry.io/"
+                }
+            ],
+            [
+                "expo-contacts",
+                {
+                    "contactsPermission": "This enables you to let non-Billie-app user follow an important issue via SMS, do you grant permission?"
+                }
+            ],
+            [
+                "expo-sensors",
+                {
+                    "motionPermission": "Allow $(PRODUCT_NAME) to access your device motion."
+                }
+            ],
+            [
+                "@react-native-voice/voice",
+                {
+                    "microphonePermission": "This feature will enable you to use your voice to send voice messages and perform voice commands within the app. Do you grant permission?",
+                    "speechRecognitionPermission": "Speech data collected from this app will be used to convert your voice inputs into text. Do you grant permission?"
+                }
+            ],
+            [
+                "expo-updates",
+                {
+                    "username": "machingclee"
+                }
+            ],
+            [
+                "expo-build-properties",
+                {
+                    "android": {
+                        "kotlinVersion": "1.8.10"
+                    }
+                }
+            ],
+            [
+                "expo-media-library",
+                {
+                    "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
+                    "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+                    "isAccessMediaLocationEnabled": true
+                }
+            ],
+            [
+                "expo-camera",
+                {
+                    "cameraPermission": "This will allow you to take photos directly within the app and post them in your messages. Do you grant permission?"
+                }
+            ],
+            [
+                "expo-image-picker",
+                {
+                    "photosPermission": "This will enable you to select and share images from your album directly into your messages. Do you grant permission?"
+                }
+            ],
+            [
+                "expo-av",
+                {
+                    "microphonePermission": "This feature will enable you to use your voice to send voice messages and perform voice commands within the app. Do you grant permission?"
+                }
+            ],
+            "expo-font",
+            "react-native-vision-camera"
+        ],
+        "owner": "billieconstruction",
+        "extra": {
+            "eas": {
+                "projectId": "cdd37cfd-714a-4d91-96ac-cda77537b091"
+            }
+        },
+        "runtimeVersion": {
+            "policy": "appVersion"
+        },
+        "updates": {
+            "url": "https://u.expo.dev/cdd37cfd-714a-4d91-96ac-cda77537b091"
+        }
+    }
+}

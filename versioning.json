@@ -1,0 +1,51 @@
+{
+    "version": "2.0.42",
+    "dev": {
+        "name": "Billie DEV",
+        "scheme": "wb-billie-dev",
+        "ios": {
+            "identifier": "com.wonderbricks.billie-mobile-dev",
+            "buildNumber": 71
+        },
+        "android": {
+            "identifier": "com.wonderbricks.billie_mobile_dev",
+            "versionCode": 48
+        }
+    },
+    "uat": {
+        "name": "Billie UAT",
+        "scheme": "wb-billie-uat",
+        "ios": {
+            "identifier": "com.wonderbricks.billie-mobile",
+            "buildNumber": 108
+        },
+        "android": {
+            "identifier": "com.wonderbricks.billie_mobile_uat",
+            "versionCode": 140
+        }
+    },
+    "poc": {
+        "name": "Billie POC",
+        "scheme": "wb-billie",
+        "ios": {
+            "identifier": "com.wonderbricks.billie-mobile-poc",
+            "buildNumber": 2
+        },
+        "android": {
+            "identifier": "com.wonderbricks.billie_mobile_poc",
+            "versionCode": 2
+        }
+    },
+    "prod": {
+        "name": "Billie App",
+        "scheme": "wb-billie",
+        "ios": {
+            "identifier": "com.wonderbricks.billie-mobile-prod",
+            "buildNumber": 58
+        },
+        "android": {
+            "identifier": "com.wonderbricks.billie_mobile_prod",
+            "versionCode": 50
+        }
+    }
+}
