@@ -24,19 +24,17 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: Check selected option
-        run: echo "Selected option: ${{ github.event.inputs.eastype }}"
 
       - name: 🚀 Debug Input Value
-        run: echo "Input value: ${{ github.event.inputs.eastype }}"
+        run: echo 'Input value:' ${{ github.event.inputs.eastype}}
 
       - name: 🚀 Expo Build
         if: ${{ github.event.inputs.eastype == 'build' }}
         run: |
-          yarn update-version-trigger-build:uat 
-          git add app.json versioning.json .env-cmdrc 
-          git commit -m "update version number in app.json" 
-          git push 
+          yarn update-version-trigger-build:uat
+          git add app.json versioning.json .env-cmdrc
+          git commit -m "update version number in app.json"
+          git push
           yarn build:uat
 
       - name: 🚀 Expo Update
